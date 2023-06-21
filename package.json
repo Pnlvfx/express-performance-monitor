@@ -1,0 +1,39 @@
+{
+  "name": "express-performance-monitor",
+  "description": "Realtime monitor for Express server appliations",
+  "version": "2023.06.21",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "scripts": {
+    "lint": "eslint ./src",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint"
+  },
+  "keywords": [
+    "node",
+    "status",
+    "monitoring",
+    "express",
+    "charts",
+    "performance"
+  ],
+  "author": {
+    "name": "Simone Gauli",
+    "email": "simonegauli@gmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.3"
+  }
+}
