@@ -1,4 +1,4 @@
-export const onHeadersListener = (statusCode: number, startTime: [number, number], spans) => {
+export const onHeadersListener = (statusCode: number, startTime: [number, number], spans: any[]) => {
   const diff = process.hrtime(startTime);
   const responseTime = (diff[0] * 1e3 + diff[1]) * 1e-6;
   const category = Math.floor(statusCode / 100);

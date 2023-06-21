@@ -26,8 +26,8 @@ const middlewareWrapper = (config?: ExpressStatusConfig) => {
     port: validatedConfig.port,
     socketPath: validatedConfig.socketPath,
     bodyClasses,
-    script: fs.readFileSync(path.join(__dirname, '/public/javascripts/app.js')),
-    style: fs.readFileSync(path.join(__dirname, '/public/stylesheets/', validatedConfig.theme)),
+    script: fs.readFileSync(path.join(__dirname, '../../../public/javascripts/app.js')),
+    style: fs.readFileSync(path.join(__dirname, '../../../public/stylesheets/', validatedConfig.theme)),
   };
 
   const htmlTmpl = fs.readFileSync(path.join(__dirname, '/public/index.html')).toString();
@@ -54,7 +54,7 @@ const middlewareWrapper = (config?: ExpressStatusConfig) => {
     }
   };
   middleware.middleware = middleware;
-  middleware.pageRoute = (req: Request, res: Response) => {
+  middleware.pageRoute = (_req: Request, res: Response) => {
     healthChecker(validatedConfig.healthChecks).then((results) => {
       res.send(render({ ...data, healthCheckResults: results }));
     });

@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
 
-export const sendMetrics = (io: Server, span) => {
+export const sendMetrics = (io: Server, span: any) => {
   io.emit('esm_stats', {
     os: span.os[span.os.length - 2],
     responses: span.responses[span.responses.length - 2],

@@ -3,7 +3,6 @@ import _debug from 'debug';
 import os from 'os';
 import v8 from 'v8';
 import { Server } from 'socket.io';
-import { RetentionSpan } from '../types/config';
 import { sendMetrics } from './send-metrics';
 const debug = _debug('express-performance-monitor');
 let eventLoopStats: any;
@@ -24,7 +23,8 @@ const defaultResponse = {
   timestamp: Date.now(),
 };
 
-export const gatherOsMetrics = (io: Server, span: RetentionSpan) => {
+export const gatherOsMetrics = (io: Server, span: any) => {
+  // RetentionSpan[]
   pidusage(process.pid, (err, stats) => {
     if (err) {
       debug(err);
@@ -52,6 +52,7 @@ export const gatherOsMetrics = (io: Server, span: RetentionSpan) => {
     if (span.os.length >= span.retention) span.os.shift();
     if (span.responses[0] && span.responses.length > span.retention) span.responses.shift();
 
+    console.log({ memory });
     sendMetrics(io, span);
   });
 };
