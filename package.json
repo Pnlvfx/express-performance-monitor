@@ -5,6 +5,10 @@
   "main": "./dist/cjs/src/index.js",
   "module": "./dist/esm/src/index.js",
   "types": "./dist/esm/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pnlvfx/express-performance-monitor.git"
+  },
   "scripts": {
     "lint": "eslint ./src",
     "build": "yarn build:esm && yarn build:cjs",
@@ -13,6 +17,11 @@
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && yarn lint"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "node",
     "status",
