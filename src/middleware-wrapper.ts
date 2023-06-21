@@ -30,7 +30,7 @@ const middlewareWrapper = (config?: ExpressStatusConfig) => {
     style: fs.readFileSync(path.join(__dirname, '../../../public/stylesheets/', validatedConfig.theme)),
   };
 
-  const htmlTmpl = fs.readFileSync(path.join(__dirname, '/public/index.html')).toString();
+  const htmlTmpl = fs.readFileSync(path.join(__dirname, '../../../public/index.html')).toString();
 
   const render = Handlebars.compile(htmlTmpl);
 
