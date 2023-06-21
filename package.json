@@ -20,7 +20,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "public"
   ],
   "keywords": [
     "node",
