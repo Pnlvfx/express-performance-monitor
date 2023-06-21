@@ -8,6 +8,7 @@ import { SocketRequest } from './types/request';
 import onHeaders from 'on-headers';
 import { socketIoInit } from './helpers/socket-init';
 import { healthChecker } from './helpers/health-checker';
+import { onHeadersListener } from './helpers/on-headers-listener';
 
 const middlewareWrapper = (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
@@ -44,14 +45,21 @@ const middlewareWrapper = (config?: ExpressStatusConfig) => {
       });
     } else {
       if (!req.path.startsWith(validatedConfig.ignoreStartsWith)) {
-        onHeaders(res, () => {});
+        onHeaders(res, () => {
+          onHeadersListener(res.statusCode, startTime, validatedConfig.spans);
+        });
       }
 
       next();
     }
   };
   middleware.middleware = middleware;
-  middleware.pageRoute = (req, res) => {};
+  middleware.pageRoute = (req: Request, res: Response) => {
+    healthChecker(validatedConfig.healthChecks).then((results) => {
+      res.send(render({ ...data, healthCheckResults: results }));
+    });
+  };
+  return middleware;
 };
 
 export default middlewareWrapper;
