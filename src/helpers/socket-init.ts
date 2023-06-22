@@ -23,10 +23,9 @@ export const socketIoInit = (server: ExpressServer, config: ValidExpressStatusCo
       addSocketEvents(socket, config);
     });
 
-    config.spans.forEach((span: any) => {
-      span.os = [];
-      span.responses = [];
-      const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
+    config.spans.forEach((span) => {
+      const toGather = { ...span, os: [], responses: [] };
+      const interval = setInterval(() => gatherOsMetrics(io, toGather), span.interval * 1000);
 
       interval.unref();
     });
