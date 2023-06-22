@@ -1,0 +1,23 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "license": "MIT",
+  "author": {
+    "name": "Simone Gauli",
+    "email": "simonegauli@gmail.com"
+  },
+  "scripts": {
+    "dev": "tsc -w & nodemon .",
+    "build": "rimraf dist && eslint ./src && tsc",
+    "start": "tsc & node ."
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.1.3"
+  }
+}
