@@ -1,11 +1,10 @@
 import middlewareWrapper from './middleware-wrapper';
 
-// export default middlewareWrapper; before push uncomment it and comment down
+export default middlewareWrapper;
+// import express from 'express';
 
-import express from 'express';
+// const app = express();
 
-const app = express();
+// app.use(middlewareWrapper());
 
-app.use(middlewareWrapper());
-
-app.listen(4000);
+// app.listen(4000);

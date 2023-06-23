@@ -2,9 +2,9 @@
   "name": "express-performance-monitor",
   "description": "Realtime monitor for Express server appliations",
   "version": "2023.6.21",
-  "main": "./dist/cjs/src/index.js",
-  "module": "./dist/esm/src/index.js",
-  "types": "./dist/esm/src/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pnlvfx/express-performance-monitor.git"
@@ -54,15 +54,12 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "express": "^4.18.2",
     "handlebars": "^4.7.7",
     "on-headers": "^1.0.2",
     "pidusage": "^3.0.2",
     "socket.io": "^4.6.2"
   },
-  "peerDependencies": {
-    "express": "^4.18.2"
-  },
+  "peerDependencies": {},
   "optionalDependencies": {
     "event-loop-stats": "^1.4.1"
   }

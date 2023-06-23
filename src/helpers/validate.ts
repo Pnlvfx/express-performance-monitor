@@ -1,4 +1,4 @@
-import { ChartVisibility, ExpressStatusConfig, ValidExpressStatusConfig } from '../types/config';
+import { ChartVisibility, ExpressStatusConfig, InitialStatusConfig } from '../types/config';
 import { defaultConfig } from './default-config';
 
 const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
@@ -10,7 +10,7 @@ const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
   return defaultConfig.chartVisibility;
 };
 
-export const validate = (config?: ExpressStatusConfig): ValidExpressStatusConfig => {
+export const validate = (config?: ExpressStatusConfig): InitialStatusConfig => {
   if (!config) {
     return defaultConfig;
   }

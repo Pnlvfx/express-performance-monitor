@@ -26,11 +26,11 @@ const middlewareWrapper = (config?: ExpressStatusConfig) => {
     port: validatedConfig.port,
     socketPath: validatedConfig.socketPath,
     bodyClasses,
-    script: fs.readFileSync(path.join(__dirname, '../../../public/javascripts/app.js')),
-    style: fs.readFileSync(path.join(__dirname, '../../../public/stylesheets/', validatedConfig.theme)),
+    script: fs.readFileSync(path.join(__dirname, '../../public/javascripts/app.js')),
+    style: fs.readFileSync(path.join(__dirname, '../../public/stylesheets/', validatedConfig.theme)),
   };
 
-  const htmlTmpl = fs.readFileSync(path.join(__dirname, '../../../public/index.html')).toString();
+  const htmlTmpl = fs.readFileSync(path.join(__dirname, '../../public/index.html')).toString();
 
   const render = Handlebars.compile(htmlTmpl);
 

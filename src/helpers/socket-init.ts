@@ -1,5 +1,5 @@
 import { Server, Socket } from 'socket.io';
-import { ValidExpressStatusConfig } from '../types/config';
+import { InitialStatusConfig, ValidExpressStatusConfig } from '../types/config';
 import { ExpressServer } from '../types/request';
 import { gatherOsMetrics } from './gather-os-metrics';
 let io: Server;
@@ -11,7 +11,7 @@ const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
   });
 };
 
-export const socketIoInit = (server: ExpressServer, config: ValidExpressStatusConfig) => {
+export const socketIoInit = (server: ExpressServer, config: InitialStatusConfig) => {
   if (io === null || io === undefined) {
     if (config.websocket) {
       io = config.websocket;
@@ -20,10 +20,10 @@ export const socketIoInit = (server: ExpressServer, config: ValidExpressStatusCo
     }
 
     io.on('connection', (socket: Socket) => {
-      addSocketEvents(socket, config);
+      addSocketEvents(socket, config as ValidExpressStatusConfig);
     });
 
-    config.spans.forEach((span) => {
+    config.spans.forEach((span: any) => {
       span.os = [];
       span.responses = [];
       const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
