@@ -23,7 +23,7 @@ export const socketIoInit = (server: ExpressServer, config: ValidExpressStatusCo
       addSocketEvents(socket, config);
     });
 
-    config.spans.forEach((span: any) => {
+    config.spans.forEach((span) => {
       span.os = [];
       span.responses = [];
       const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
