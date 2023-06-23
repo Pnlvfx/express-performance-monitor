@@ -56,10 +56,12 @@
     "debug": "^4.3.4",
     "handlebars": "^4.7.7",
     "on-headers": "^1.0.2",
-    "pidusage": "^3.0.2",
-    "socket.io": "^4.6.2"
+    "pidusage": "^3.0.2"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.0"
+  },
   "optionalDependencies": {
     "event-loop-stats": "^1.4.1"
   }
