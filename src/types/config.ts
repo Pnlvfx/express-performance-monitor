@@ -1,18 +1,21 @@
 import { Server } from 'socket.io';
+import { OsMetrics } from './os-metrics';
 export interface ValidExpressStatusConfig {
   title: string;
   theme: string;
   path: string;
   socketPath: string;
   websocket: Server | null;
-  spans: RetentionSpan[];
+  spans: OsMetrics[];
   port: number | null;
   chartVisibility: ChartVisibility;
   healthChecks: HealthCheck[];
   ignoreStartsWith: string;
 }
 
-export type ExpressStatusConfig = Partial<ValidExpressStatusConfig>;
+type OmittedConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: RetentionSpan[] };
+
+export type ExpressStatusConfig = Partial<OmittedConfig>;
 
 export interface ChartVisibility {
   cpu?: boolean;

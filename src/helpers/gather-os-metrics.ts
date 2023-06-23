@@ -4,7 +4,7 @@ import os from 'os';
 import v8 from 'v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics';
-import {EventLoopStats} from 'event-loop-stats';
+import { EventLoopStats } from 'event-loop-stats';
 import { OsMetrics } from '../types/os-metrics';
 
 interface EventLoop {
