@@ -1,4 +1,5 @@
 import express from 'express';
+import statusMonitor from '../../di'
 
 const app = express();
 

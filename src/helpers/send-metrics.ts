@@ -1,7 +1,6 @@
 import { Server } from 'socket.io';
-import { OsMetrics } from '../types/os-metrics';
 
-export const sendMetrics = (io: Server, span: OsMetrics) => {
+export const sendMetrics = (io: Server, span: any) => {
   io.emit('esm_stats', {
     os: span.os[span.os.length - 2],
     responses: span.responses[span.responses.length - 2],

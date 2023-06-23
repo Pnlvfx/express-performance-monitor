@@ -5,13 +5,7 @@ import v8 from 'v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics';
 const debug = _debug('express-performance-monitor');
-import { EventLoopStats } from 'event-loop-stats';
-import { OsMetrics } from '../types/os-metrics';
-
-interface EventLoop {
-  sense: () => EventLoopStats;
-}
-let eventLoopStats: EventLoop;
+let eventLoopStats: any;
 
 try {
   eventLoopStats = require('event-loop-stats');
@@ -29,7 +23,8 @@ const defaultResponse = {
   timestamp: Date.now(),
 };
 
-export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
+export const gatherOsMetrics = (io: Server, span: any) => {
+  // RetentionSpan[]
   pidusage(process.pid, (err, stats) => {
     if (err) {
       debug(err);
@@ -43,7 +38,7 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
     const timestamp = Date.now();
     const heap = v8.getHeapStatistics();
 
-    let loop: EventLoopStats | undefined;
+    let loop: any;
 
     if (eventLoopStats) {
       loop = eventLoopStats.sense();
@@ -57,6 +52,7 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
     if (span.os.length >= span.retention) span.os.shift();
     if (span.responses[0] && span.responses.length > span.retention) span.responses.shift();
 
+    console.log({ memory });
     sendMetrics(io, span);
   });
 };
