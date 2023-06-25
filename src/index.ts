@@ -1,6 +1,6 @@
-import middlewareWrapper from './middleware-wrapper';
+import statusMonitor from './middleware-wrapper';
 
-export default middlewareWrapper;
+export default statusMonitor;
 // import express from 'express';
 
 // const app = express();
