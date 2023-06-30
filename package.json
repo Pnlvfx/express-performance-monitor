@@ -10,7 +10,7 @@
     "url": "git+https://github.com/Pnlvfx/express-performance-monitor.git"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "rimraf coverage && jest --coverage",
     "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon . && yarn copy:public",
     "lint": "eslint ./src",
     "build": "rimraf dist && yarn build:esm && yarn build:cjs && yarn copy:public",
