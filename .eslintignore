@@ -3,3 +3,4 @@ dist
 yarn-error.log
 .eslintrc.js
 jest.config.js
+public
