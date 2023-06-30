@@ -17,8 +17,6 @@ export const defaultConfig = {
       retention: 60,
     },
   ],
-  port: null,
-  websocket: null,
   chartVisibility: {
     cpu: true,
     mem: true,

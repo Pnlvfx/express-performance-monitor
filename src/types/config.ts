@@ -5,9 +5,9 @@ export interface ValidExpressStatusConfig {
   theme: string;
   path: string;
   socketPath: string;
-  websocket: Server | null;
+  websocket?: Server;
   spans: OsMetrics[];
-  port: number | null;
+  port?: number;
   chartVisibility: ChartVisibility;
   healthChecks: HealthCheck[];
   ignoreStartsWith: string;
@@ -17,7 +17,9 @@ type OmittedConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: Retentio
 
 export type ExpressStatusConfig = Partial<OmittedConfig>;
 
-export type InitialStatusConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: RetentionSpan[] };
+type PartialSpan = Omit<OsMetrics, 'interval' | 'retention'>;
+
+export type InitialStatusConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: Partial<PartialSpan>[] & RetentionSpan[] };
 
 export interface ChartVisibility {
   cpu?: boolean;

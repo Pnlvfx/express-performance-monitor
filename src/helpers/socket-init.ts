@@ -2,6 +2,7 @@ import { Server, Socket } from 'socket.io';
 import { InitialStatusConfig, ValidExpressStatusConfig } from '../types/config';
 import { ExpressServer } from '../types/request';
 import { gatherOsMetrics } from './gather-os-metrics';
+import { OsMetrics } from '../types/os-metrics';
 let io: Server;
 
 const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
@@ -22,7 +23,10 @@ export const socketIoInit = (server: ExpressServer, config: InitialStatusConfig)
     for (const span of config.spans) {
       span.os = [];
       span.responses = [];
-      const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
+      const interval = setInterval(() => {
+        if (!span.os) return;
+        gatherOsMetrics(io, span as OsMetrics);
+      }, span.interval * 1000);
 
       interval.unref();
     }
