@@ -13,7 +13,7 @@ const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
 };
 
 export const socketIoInit = (server: ExpressServer, config: InitialStatusConfig) => {
-  if (io === undefined || io === null) {
+  if (io === undefined) {
     io = config.websocket || new Server(server);
 
     io.on('connection', (socket: Socket) => {
