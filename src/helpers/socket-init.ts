@@ -12,23 +12,19 @@ const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {
 };
 
 export const socketIoInit = (server: ExpressServer, config: InitialStatusConfig) => {
-  if (io === null || io === undefined) {
-    if (config.websocket) {
-      io = config.websocket;
-    } else {
-      io = new Server(server);
-    }
+  if (io === undefined || io === null) {
+    io = config.websocket || new Server(server);
 
     io.on('connection', (socket: Socket) => {
       addSocketEvents(socket, config as ValidExpressStatusConfig);
     });
 
-    config.spans.forEach((span: any) => {
+    for (const span of config.spans) {
       span.os = [];
       span.responses = [];
       const interval = setInterval(() => gatherOsMetrics(io, span), span.interval * 1000);
 
       interval.unref();
-    });
+    }
   }
 };

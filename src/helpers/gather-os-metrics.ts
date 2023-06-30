@@ -1,7 +1,8 @@
+/* eslint-disable unicorn/prefer-at */
 import pidusage from 'pidusage';
 import _debug from 'debug';
-import os from 'os';
-import v8 from 'v8';
+import os from 'node:os';
+import v8 from 'node:v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics';
 import { EventLoopStats } from 'event-loop-stats';
@@ -15,8 +16,9 @@ const debug = _debug('express-performance-monitor');
 let eventLoopStats: EventLoop;
 
 try {
+  // eslint-disable-next-line unicorn/prefer-module
   eventLoopStats = require('event-loop-stats');
-} catch (err) {
+} catch {
   console.warn('event-loop-stats not found, ignoring event loop metrics...');
 }
 

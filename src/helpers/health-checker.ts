@@ -18,7 +18,7 @@ const allSettled = (promises: Promise<Response>[]) => {
 
 export const healthChecker = async (healthChecks: HealthCheck[]) => {
   const checkPromises: Promise<Response>[] = [];
-  healthChecks.forEach((healthCheck) => {
+  for (const healthCheck of healthChecks) {
     let uri = `${healthCheck.protocol}://${healthCheck.host}`;
 
     if (healthCheck.port) {
@@ -32,24 +32,24 @@ export const healthChecker = async (healthChecks: HealthCheck[]) => {
         method: 'GET',
       }),
     );
-  });
+  }
 
   const checkResults: CheckResult[] = [];
 
   return allSettled(checkPromises).then((results) => {
-    results.forEach((result, index) => {
+    for (const [i, result] of results.entries()) {
       if (result.state === 'rejected') {
         checkResults.push({
-          path: healthChecks[index].path,
+          path: healthChecks[i].path,
           status: 'failed',
         });
       } else {
         checkResults.push({
-          path: healthChecks[index].path,
+          path: healthChecks[i].path,
           status: 'ok',
         });
       }
-    });
+    }
 
     return checkResults;
   });

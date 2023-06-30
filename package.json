@@ -10,19 +10,20 @@
     "url": "git+https://github.com/Pnlvfx/express-performance-monitor.git"
   },
   "scripts": {
-    "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon .",
+    "test": "jest --coverage",
+    "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon . && yarn copy:public",
     "lint": "eslint ./src",
-    "build": "yarn build:esm && yarn build:cjs",
+    "build": "rimraf dist && yarn build:esm && yarn build:cjs && yarn copy:public",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "copy:public": "cp -R public dist/public",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test && yarn lint"
   },
   "files": [
     "dist",
     "LICENSE",
-    "README.md",
-    "public"
+    "README.md"
   ],
   "keywords": [
     "node",
@@ -41,8 +42,10 @@
     "debug": "^4.3.4",
     "handlebars": "^4.7.7",
     "on-headers": "^1.0.2",
-    "pidusage": "^3.0.2",
-    "socket.io": "^4.7.0"
+    "pidusage": "^3.0.2"
+  },
+  "peerDependencies": {
+    "socket.io": "^4.7.1"
   },
   "optionalDependencies": {
     "event-loop-stats": "^1.4.1"
@@ -50,6 +53,7 @@
   "devDependencies": {
     "@types/debug": "^4.1.8",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
     "@types/on-headers": "^1.0.0",
     "@types/pidusage": "^2.0.2",
@@ -57,10 +61,17 @@
     "@typescript-eslint/parser": "^5.60.0",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-sonarjs": "^0.19.0",
+    "eslint-plugin-unicorn": "^47.0.0",
+    "express": "^4.18.2",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
+    "socket.io": "^4.7.1",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.1.3"
   }
 }

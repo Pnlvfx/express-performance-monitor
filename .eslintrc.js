@@ -1,6 +1,15 @@
 module.exports = {
+  root: true,
   parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:sonarjs/recommended',
+    'plugin:unicorn/recommended',
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -44,5 +53,8 @@ module.exports = {
     'no-unsafe-negation': 'error',
     'prefer-const': 'error',
     'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+
+    'unicorn/prevent-abbreviations': 'off',
+    'unicorn/catch-error-name': 'off',
   },
 };

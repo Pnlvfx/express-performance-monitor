@@ -1,6 +1,6 @@
 import pidusage from 'pidusage';
 import { RetentionSpan } from './config';
-import v8 from 'v8';
+import v8 from 'node:v8';
 import { EventLoopStats } from 'event-loop-stats';
 
 export interface OsMetrics extends RetentionSpan {

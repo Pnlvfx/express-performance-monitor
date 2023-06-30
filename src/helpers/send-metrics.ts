@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-at */
 import { Server } from 'socket.io';
 import { OsMetrics } from '../types/os-metrics';
 

@@ -1,9 +1,10 @@
-import fs from 'fs';
-import path from 'path';
+/* eslint-disable unicorn/prefer-module */
+import fs from 'node:fs';
+import path from 'node:path';
 import { validate } from './helpers/validate';
 import { ChartVisibility, ExpressStatusConfig } from './types/config';
 import Handlebars from 'handlebars';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { SocketRequest } from './types/request';
 import onHeaders from 'on-headers';
 import { socketIoInit } from './helpers/socket-init';
@@ -12,25 +13,23 @@ import { onHeadersListener } from './helpers/on-headers-listener';
 
 const middlewareWrapper = (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
-  const bodyClasses = Object.keys(validatedConfig.chartVisibility)
-    .reduce((accumulator: string[], key) => {
-      if (validatedConfig.chartVisibility[key as keyof ChartVisibility] === false) {
-        accumulator.push(`hide-${key}`);
-      }
-      return accumulator;
-    }, [])
-    .join(' ');
+  const bodyClasses: string[] = [];
+  for (const key in validatedConfig.chartVisibility) {
+    if (validatedConfig.chartVisibility[key as keyof ChartVisibility] === false) {
+      bodyClasses.push(`hide-${key}`);
+    }
+  }
 
   const data = {
     title: validatedConfig.title,
     port: validatedConfig.port,
     socketPath: validatedConfig.socketPath,
-    bodyClasses,
-    script: fs.readFileSync(path.join(__dirname, '../../public/javascripts/app.js')),
-    style: fs.readFileSync(path.join(__dirname, '../../public/stylesheets/', validatedConfig.theme)),
+    bodyClasses: bodyClasses.join(' '),
+    script: fs.readFileSync(path.join(__dirname, '../public/javascripts/app.js')),
+    style: fs.readFileSync(path.join(__dirname, '../public/stylesheets/', validatedConfig.theme)),
   };
 
-  const htmlTmpl = fs.readFileSync(path.join(__dirname, '../../public/index.html')).toString();
+  const htmlTmpl = fs.readFileSync(path.join(__dirname, '../public/index.html')).toString();
 
   const render = Handlebars.compile(htmlTmpl);
 

@@ -1,5 +1,5 @@
-import { Request } from 'express';
-import http from 'http';
+import type { Request } from 'express';
+import http from 'node:http';
 export type ExpressServer = http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 
 export interface SocketRequest extends Request {

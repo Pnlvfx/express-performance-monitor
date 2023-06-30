@@ -17,7 +17,7 @@ type OmittedConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: Retentio
 
 export type ExpressStatusConfig = Partial<OmittedConfig>;
 
-export type InitialStatusConfig = Omit<ValidExpressStatusConfig, 'spans'> & {spans: RetentionSpan[]}
+export type InitialStatusConfig = Omit<ValidExpressStatusConfig, 'spans'> & { spans: RetentionSpan[] };
 
 export interface ChartVisibility {
   cpu?: boolean;
