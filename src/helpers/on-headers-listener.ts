@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable unicorn/prefer-at */
 export const onHeadersListener = (statusCode: number, startTime: [number, number], spans: any[]) => {
