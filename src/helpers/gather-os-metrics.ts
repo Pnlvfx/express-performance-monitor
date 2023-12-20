@@ -1,12 +1,11 @@
-/* eslint-disable unicorn/prefer-at */
+import type { EventLoopStats } from 'event-loop-stats';
+import type { OsMetrics } from '../types/os-metrics';
 import pidusage from 'pidusage';
 import _debug from 'debug';
 import os from 'node:os';
 import v8 from 'node:v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics';
-import { EventLoopStats } from 'event-loop-stats';
-import { OsMetrics } from '../types/os-metrics';
 
 interface EventLoop {
   sense: () => EventLoopStats;
@@ -39,7 +38,8 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
       return;
     }
 
-    const last = span.responses[span.responses.length - 1];
+    const last = span.responses.at(-1);
+    if (!last) throw new Error('Invalid os metrics received');
 
     const memory = stats.memory / 1024 / 1024;
     const load = os.loadavg();
