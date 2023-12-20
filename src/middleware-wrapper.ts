@@ -9,7 +9,7 @@ import onHeaders from 'on-headers';
 import { socketIoInit } from './helpers/socket-init.js';
 import { healthChecker } from './helpers/health-checker.js';
 import { onHeadersListener } from './helpers/on-headers-listener.js';
-const cwd = process.env['IS_LOCAL'] ? '.' : './node_modules/dist';
+const cwd = process.env['IS_LOCAL'] ? '.' : './node_modules/express-performance-monitor/dist';
 
 const middlewareWrapper = (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
