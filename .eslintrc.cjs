@@ -5,14 +5,22 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'plugin:import/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:sonarjs/recommended',
     'plugin:unicorn/recommended',
   ],
+  plugins: ['sonarjs', 'unicorn'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: true,
+      node: true,
+    },
   },
   env: {
     es6: true,
@@ -52,9 +60,12 @@ module.exports = {
     'no-multiple-empty-lines': 'error',
     'no-unsafe-negation': 'error',
     'prefer-const': 'error',
-    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
 
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/catch-error-name': 'off',
+    'import/no-unresolved': 'off',
+    'import/no-named-as-default-member': 'off',
   },
 };

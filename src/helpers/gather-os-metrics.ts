@@ -1,11 +1,11 @@
 import type { EventLoopStats } from 'event-loop-stats';
-import type { OsMetrics } from '../types/os-metrics';
+import type { OsMetrics } from '../types/os-metrics.js';
 import pidusage from 'pidusage';
 import _debug from 'debug';
 import os from 'node:os';
 import v8 from 'node:v8';
 import { Server } from 'socket.io';
-import { sendMetrics } from './send-metrics';
+import { sendMetrics } from './send-metrics.js';
 
 interface EventLoop {
   sense: () => EventLoopStats;

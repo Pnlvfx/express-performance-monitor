@@ -1,4 +1,4 @@
-import { HealthCheck } from '../types/config';
+import type { HealthCheck } from '../types/config.js';
 
 interface CheckResult {
   status: string;
@@ -38,14 +38,16 @@ export const healthChecker = async (healthChecks: HealthCheck[]) => {
 
   return allSettled(checkPromises).then((results) => {
     for (const [i, result] of results.entries()) {
+      const healthCheck = healthChecks.at(i);
+      if (!healthCheck) continue;
       if (result.state === 'rejected') {
         checkResults.push({
-          path: healthChecks[i].path,
+          path: healthCheck.path,
           status: 'failed',
         });
       } else {
         checkResults.push({
-          path: healthChecks[i].path,
+          path: healthCheck.path,
           status: 'ok',
         });
       }

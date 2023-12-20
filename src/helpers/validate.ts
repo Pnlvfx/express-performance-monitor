@@ -1,5 +1,5 @@
-import { ChartVisibility, ExpressStatusConfig, InitialStatusConfig } from '../types/config';
-import { defaultConfig } from './default-config';
+import type { ChartVisibility, ExpressStatusConfig, InitialStatusConfig } from '../types/config.js';
+import { defaultConfig } from './default-config.js';
 
 const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
   for (const key of Object.keys(defaultConfig.chartVisibility)) {

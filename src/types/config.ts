@@ -1,5 +1,5 @@
 import { Server } from 'socket.io';
-import { OsMetrics } from './os-metrics';
+import type { OsMetrics } from './os-metrics.js';
 export interface ValidExpressStatusConfig {
   title: string;
   theme: string;

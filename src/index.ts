@@ -7,4 +7,4 @@
 
 // app.listen(4000);
 
-export { default } from './middleware-wrapper';
+export { default } from './middleware-wrapper.js';

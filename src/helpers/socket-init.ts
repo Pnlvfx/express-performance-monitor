@@ -1,8 +1,8 @@
 import { Server, Socket } from 'socket.io';
-import { InitialStatusConfig, ValidExpressStatusConfig } from '../types/config';
-import { ExpressServer } from '../types/request';
-import { gatherOsMetrics } from './gather-os-metrics';
-import { OsMetrics } from '../types/os-metrics';
+import type { InitialStatusConfig, ValidExpressStatusConfig } from '../types/config.js';
+import type { ExpressServer } from '../types/request.js';
+import { gatherOsMetrics } from './gather-os-metrics.js';
+import { OsMetrics } from '../types/os-metrics.js';
 let io: Server;
 
 const addSocketEvents = (socket: Socket, config: ValidExpressStatusConfig) => {

@@ -2,28 +2,47 @@
   "name": "express-performance-monitor",
   "description": "Realtime monitor for Express server appliations",
   "version": "2023.6.21",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/esm/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./*": {
+      "import": "./*",
+      "require": "./*"
+    }
+  },
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Simone Gauli",
+    "email": "simonegauli@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pnlvfx/express-performance-monitor.git"
   },
   "scripts": {
-    "test": "rimraf coverage && jest --coverage",
-    "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon . && npm run copy:public",
+    "generate:package.json": "tsx ./tools/generate-commonjs-package-json.ts dist/cjs/package.json",
+    "dev": "tsc -w --outDir dist/esm & IS_LOCAL=true nodemon .",
     "lint": "eslint ./src",
-    "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy:public",
+    "build": "rimraf dist && npm run lint && npm run build:esm && npm run build:cjs && npm run generate:package.json",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:cjs": "tsc --module commonjs --moduleResolution node --outDir dist/cjs",
     "copy:public": "cp -R public dist/public",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run lint"
+    "prepublishOnly": "npm run test && npm run lint",
+    "test": "rimraf coverage && jest --coverage"
   },
   "files": [
     "dist",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "public"
   ],
   "keywords": [
     "node",
@@ -33,11 +52,6 @@
     "charts",
     "performance"
   ],
-  "author": {
-    "name": "Simone Gauli",
-    "email": "simonegauli@gmail.com"
-  },
-  "license": "MIT",
   "dependencies": {
     "debug": "^4.3.4",
     "handlebars": "^4.7.7",
@@ -61,6 +75,7 @@
     "@typescript-eslint/parser": "^6.1.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-sonarjs": "^0.19.0",
@@ -70,8 +85,8 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "rimraf": "^5.0.1",
-    "socket.io": "^4.7.1",
     "ts-jest": "^29.1.1",
+    "tsx": "^4.7.0",
     "typescript": "^5.1.6"
   }
 }

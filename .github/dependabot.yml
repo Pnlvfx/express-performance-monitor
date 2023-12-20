@@ -1,7 +1,0 @@
-version: 2
-updates:
-  - package-ecosystem: "yarn" # Specify "yarn" as the package ecosystem for Yarn dependencies
-    directory: "/" # Specify the directory where your package's dependencies are located
-    schedule:
-      interval: "daily" # Set the frequency for Dependabot checks (daily, weekly, monthly)
-    open-pull-requests-limit: 10 # Set the maximum number of open Dependabot pull requests
