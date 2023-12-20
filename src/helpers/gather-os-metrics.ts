@@ -1,4 +1,4 @@
-import type { EventLoopStats } from 'event-loop-stats';
+import type { EventLoopStats } from '../types/event-loop-stats.js';
 import type { OsMetrics } from '../types/os-metrics.js';
 import pidusage from 'pidusage';
 import _debug from 'debug';
