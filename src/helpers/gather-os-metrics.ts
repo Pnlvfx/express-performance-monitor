@@ -17,8 +17,8 @@ let eventLoopStats: EventLoop;
 try {
   // eslint-disable-next-line unicorn/prefer-module
   eventLoopStats = require('event-loop-stats');
-} catch {
-  console.warn('event-loop-stats not found, ignoring event loop metrics...');
+} catch (err) {
+  console.warn('Ignoring event loop metrics...', err);
 }
 
 const defaultResponse = {
