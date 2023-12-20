@@ -11,14 +11,14 @@
   },
   "scripts": {
     "test": "rimraf coverage && jest --coverage",
-    "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon . && yarn copy:public",
+    "dev": "tsc -w --module commonjs --outDir dist/cjs & nodemon . && npm run copy:public",
     "lint": "eslint ./src",
-    "build": "rimraf dist && yarn build:esm && yarn build:cjs && yarn copy:public",
+    "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copy:public",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "copy:public": "cp -R public dist/public",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test && yarn lint"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run lint"
   },
   "files": [
     "dist",
