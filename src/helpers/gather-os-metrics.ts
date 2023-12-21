@@ -39,7 +39,6 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
     }
 
     const last = span.responses.at(-1);
-    if (!last) throw new Error('Invalid os metrics received');
 
     const memory = stats.memory / 1024 / 1024;
     const load = os.loadavg();
@@ -53,7 +52,7 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
     }
 
     span.os.push({ ...stats, memory, load, timestamp, heap, loop });
-    if (!span.responses[0] || (last.timestamp + span.interval) * 1000 < Date.now()) {
+    if (last && (!span.responses[0] || (last.timestamp + span.interval) * 1000 < Date.now())) {
       span.responses.push(defaultResponse);
     }
 
