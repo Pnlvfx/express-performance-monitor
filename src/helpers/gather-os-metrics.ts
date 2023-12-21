@@ -15,7 +15,8 @@ const debug = _debug('express-performance-monitor');
 let eventLoopStats: EventLoop;
 
 try {
-  eventLoopStats = await import('event-loop-stats');
+  // eslint-disable-next-line unicorn/prefer-module
+  eventLoopStats = require('event-loop-stats');
 } catch (err) {
   console.warn('Ignoring event loop metrics...', err);
 }
