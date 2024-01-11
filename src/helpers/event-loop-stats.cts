@@ -1,11 +1,18 @@
-/* eslint-disable unicorn/prefer-module */
-let eventLoopStats;
+import type { EventLoopStats } from 'event-loop-stats';
 
-try {
-  eventLoopStats = require('event-loop-stats');
-} catch (err) {
-  console.warn('Ignoring event loop metrics...', err);
-  eventLoopStats = {};
+/* eslint-disable unicorn/prefer-module */
+interface EventLoop {
+  sense: () => EventLoopStats;
 }
 
-module.exports = eventLoopStats;
+export const getEventLoopStats = () => {
+  let eventLoopStats: EventLoop | undefined;
+
+  try {
+    eventLoopStats = require('event-loop-stats');
+    return eventLoopStats;
+  } catch (err) {
+    console.warn('Ignoring event loop metrics...', err);
+    return;
+  }
+};

@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/cognitive-complexity */
-/* eslint-disable unicorn/prefer-at */
 export const onHeadersListener = (statusCode: number, startTime: [number, number], spans: any[]) => {
   const diff = process.hrtime(startTime);
   const responseTime = (diff[0] * 1e3 + diff[1]) * 1e-6;
   const category = Math.floor(statusCode / 100);
 
   for (const span of spans) {
-    const last = span.responses[span.responses.length - 1];
+    const last = span.responses.at(-1);
 
     if (last !== undefined && last.timestamp / 1000 + span.interval > Date.now() / 1000) {
       last[category] += 1;

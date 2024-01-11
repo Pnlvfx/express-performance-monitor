@@ -9,7 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "nodemon .",
+    "dev": "IS_LOCAL=true nodemon .",
     "build": "rimraf dist && eslint ./src && tsc",
     "start": "tsc & node ."
   },

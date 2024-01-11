@@ -6,17 +6,9 @@ import os from 'node:os';
 import v8 from 'node:v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics.js';
-import eventLoopStats from './event-loop-stats.cjs';
+import { getEventLoopStats } from './event-loop-stats.cjs';
 
-interface EventLoop {
-  sense: () => EventLoopStats;
-}
-
-const eventLoop = eventLoopStats as EventLoop | Record<string, never>;
-
-const isEventLoopStats = (eventL: EventLoop | Record<string, never>): eventL is EventLoop => {
-  return 'sense' in eventL;
-};
+const eventLoopStats = getEventLoopStats();
 
 const debug = _debug('express-performance-monitor');
 
@@ -46,10 +38,9 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
 
     let loop: EventLoopStats | undefined;
 
-    if (isEventLoopStats(eventLoop)) {
-      loop = eventLoop.sense();
+    if (eventLoopStats) {
+      loop = eventLoopStats.sense();
     }
-
     span.os.push({ ...stats, memory, load, timestamp, heap, loop });
     if (last && (!span.responses[0] || (last.timestamp + span.interval) * 1000 < Date.now())) {
       span.responses.push(defaultResponse);
