@@ -1,10 +1,10 @@
-// import express from 'express';
-// import middlewareWrapper from './middleware-wrapper';
+import express from 'express';
+import middlewareWrapper from './middleware-wrapper.js';
 
-// const app = express();
+const app = express();
 
-// app.use(middlewareWrapper());
+app.use(middlewareWrapper());
 
-// app.listen(4000);
+app.listen(4000);
 
 export { default } from './middleware-wrapper.js';

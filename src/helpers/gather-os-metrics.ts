@@ -6,20 +6,19 @@ import os from 'node:os';
 import v8 from 'node:v8';
 import { Server } from 'socket.io';
 import { sendMetrics } from './send-metrics.js';
+import eventLoopStats from './event-loop-stats.cjs';
 
 interface EventLoop {
   sense: () => EventLoopStats;
 }
 
-const debug = _debug('express-performance-monitor');
-let eventLoopStats: EventLoop;
+const eventLoop = eventLoopStats as EventLoop | Record<string, never>;
 
-try {
-  // eslint-disable-next-line unicorn/prefer-module
-  eventLoopStats = require('event-loop-stats');
-} catch (err) {
-  console.warn('Ignoring event loop metrics...', err);
-}
+const isEventLoopStats = (eventL: EventLoop | Record<string, never>): eventL is EventLoop => {
+  return 'sense' in eventL;
+};
+
+const debug = _debug('express-performance-monitor');
 
 const defaultResponse = {
   2: 0,
@@ -47,8 +46,8 @@ export const gatherOsMetrics = (io: Server, span: OsMetrics) => {
 
     let loop: EventLoopStats | undefined;
 
-    if (eventLoopStats) {
-      loop = eventLoopStats.sense();
+    if (isEventLoopStats(eventLoop)) {
+      loop = eventLoop.sense();
     }
 
     span.os.push({ ...stats, memory, load, timestamp, heap, loop });

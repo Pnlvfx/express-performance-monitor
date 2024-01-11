@@ -2,9 +2,10 @@ import type { ChartVisibility, ExpressStatusConfig, InitialStatusConfig } from '
 import { defaultConfig } from './default-config.js';
 
 const mungeChartVisibility = (configChartVisibility: ChartVisibility) => {
-  for (const key of Object.keys(defaultConfig.chartVisibility)) {
-    if (configChartVisibility[key as keyof ChartVisibility] === false) {
-      defaultConfig.chartVisibility[key as keyof ChartVisibility] = false;
+  for (const k of Object.keys(defaultConfig.chartVisibility)) {
+    const key = k as keyof ChartVisibility;
+    if (configChartVisibility[key] === false) {
+      defaultConfig.chartVisibility[key] = false;
     }
   }
   return defaultConfig.chartVisibility;

@@ -13,7 +13,7 @@ const cwd = process.env['IS_LOCAL'] ? '.' : './node_modules/express-performance-
 
 const middlewareWrapper = (config?: ExpressStatusConfig) => {
   const validatedConfig = validate(config);
-  const bodyClasses: string[] = [];
+  const bodyClasses = [];
   for (const key in validatedConfig.chartVisibility) {
     if (validatedConfig.chartVisibility[key as keyof ChartVisibility] === false) {
       bodyClasses.push(`hide-${key}`);
