@@ -1,5 +1,5 @@
 import express from 'express';
-import statusMonitor from '../../dist/esm/index.js';
+import statusMonitor from '../../src/index.js';
 
 const app = express();
 

@@ -41,7 +41,6 @@
     "build": "rimraf dist && npm run lint && npm run build:esm && npm run build:cjs && npm run generate:package.json",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --moduleResolution node --outDir dist/cjs",
-    "copy:public": "cp -R public dist/public",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run lint",
     "test": "rimraf coverage && jest --coverage"
@@ -67,7 +66,7 @@
     "pidusage": "^3.0.2"
   },
   "peerDependencies": {
-    "socket.io": "^4.7.1"
+    "socket.io": "^4.7.3"
   },
   "optionalDependencies": {
     "event-loop-stats": "^1.4.1"
@@ -89,7 +88,6 @@
     "eslint-plugin-sonarjs": "^0.23.0",
     "eslint-plugin-unicorn": "^50.0.1",
     "event-loop-stats": "^1.4.1",
-    "express": "^4.18.2",
     "jest": "^29.7.0",
     "nodemon": "^3.0.2",
     "prettier": "^3.1.1",
