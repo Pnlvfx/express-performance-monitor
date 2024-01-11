@@ -1,7 +1,7 @@
 {
   "name": "express-performance-monitor",
   "description": "Realtime monitor for Express server appliations",
-  "version": "2023.6.21",
+  "version": "2024.1.11",
   "main": "./dist/esm/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",

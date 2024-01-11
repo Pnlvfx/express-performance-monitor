@@ -1,1 +1,1 @@
-export { default } from './middleware-wrapper.js';
+export { default as statusMonitor } from './middleware-wrapper.js';
