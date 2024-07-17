@@ -36,7 +36,7 @@
     "generate:package.json": "tsx ./tools/generate-commonjs-package-json.ts dist/cjs/package.json",
     "generate:event-loop-stats": "tsx ./tools/generate-event-loop-types.ts src/types/event-loop-stats.ts",
     "update-types": "npm run generate:event-loop-stats",
-    "dev": "tsc -w --outDir dist/esm & IS_LOCAL=true nodemon .",
+    "dev": "tsc -w & IS_LOCAL=true node --watch .",
     "lint": "eslint ./src",
     "build": "rimraf dist && npm run lint && npm run build:esm && npm run build:cjs && npm run generate:package.json",
     "build:esm": "tsc",
