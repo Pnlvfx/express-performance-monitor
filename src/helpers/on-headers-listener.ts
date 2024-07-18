@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable sonarjs/cognitive-complexity */
 export const onHeadersListener = (statusCode: number, startTime: [number, number], spans: any[]) => {
   const diff = process.hrtime(startTime);
   const responseTime = (diff[0] * 1e3 + diff[1]) * 1e-6;
